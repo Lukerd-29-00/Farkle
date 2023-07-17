@@ -1,6 +1,12 @@
-var diceArr = [];
+const NUM_PLAYERS = 2;
+const NUM_DICE = 6;
 
-NUM_DICE = 6;
+const total_scores = new Array(NUM_PLAYERS);
+total_scores.fill(0)
+
+let player = -1;
+
+const diceArr = [];
 
 let round_score = 0;
 
@@ -17,8 +23,17 @@ const config = {
 };
 
 
+for(let i = 0;i < NUM_PLAYERS;i++){
+	const node = document.createElement("div");
+	node.classList.add("row","score");
+	node.id = `total-score-${i}`;
+	node.innerText = 0;
+	document.getElementById("scores-row").appendChild(node)
+}
+
 function initializeDice(){
 	firstRoll = 0;
+	document.getElementById("bank").classList.add("locked")
 	const imgs = document.getElementsByClassName("image")
 	for(let i = 0;i < imgs.length;i++){
 		imgs[i].classList.remove("transparent")
@@ -33,6 +48,8 @@ function initializeDice(){
 		document.getElementById(`die${i+1}`).classList.remove("transparent")
 		document.getElementById(`die${i+1}`).classList.remove("locked")
 	}
+	player = (player + 1) % NUM_PLAYERS;
+	document.getElementById("player").innerText = `Player ${player+1}'s turn`
 }
 
 /*Rolling dice values*/
@@ -54,16 +71,17 @@ function rollDice(){
 		}
 	}
 	if(calcScore(diceArr.filter(v => {
-		return v.locked === 0
+		return v.locked === 0;
 	})) == 0){
-		alert("Farkle!")
+		alert("Farkle!");
 		initializeDice();
 		round_score = 0;
 		roll_score = 0;
-		document.getElementById("round-score").innerText = `${0}`
+		document.getElementById("round-score").innerText = `${0}`;
 	}
 	else{
 		firstRoll = 1;
+		document.getElementById("bank").classList.remove("locked");
 	}
 	updateDiceImg();
 }
@@ -72,14 +90,14 @@ function bankScore(){
 	if(!firstRoll){
 		return
 	}
-	total_score += round_score + roll_score;
-	initializeDice();
+	total_scores[player] += round_score + roll_score;
 	round_score = 0;
 	roll_score = 0;
 
-	document.getElementById("total-score").innerText = `${total_score}`;
+	document.getElementById(`total-score-${player}`).innerText = `${total_scores[player]}`;
 	document.getElementById("round-score").innerText = `${0}`;
 
+	initializeDice();
 	updateDiceImg();
 }
 

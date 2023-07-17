@@ -2,12 +2,12 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="farkle.css">
-	<script type="text/javascript" src="farkle.js"></script>
+	<script type="text/javascript" src="farkle.js" defer></script>
 	<title>Farkle!</title>
 </head>
 
 <body onload="initializeDice()">
-	<header class="row header">Welcome to Farkle!</header>
+	<header class="row header" id="player"></header>
 	<div class="row">
 		<!-- Dice images -->
 		<div class="dice" id="dice-row"> 
@@ -21,12 +21,12 @@
 	</div>
 	<!-- Scoring -->
 	<div class="row score" id="round-score"> 0 </div>
-	<div class="row score" id="total-score">0</div>
-
 	<!-- Button row -->
 	<div class="row">
 		<button class="button roll column" onclick="rollDice()">Roll Dice</button>
-		<button class="button bank column" onClick="bankScore()">Bank Score</button>
+		<button class="button bank column" id="bank" onClick="bankScore()">Bank Score</button>
 	</div>
+	<!-- Total scores-->
+	<footer class="row totals" id="scores-row"></div>
 </body>
 </html>
