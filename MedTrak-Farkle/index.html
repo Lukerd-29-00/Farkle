@@ -7,25 +7,30 @@
 </head>
 
 <body onload="initializeDice()" id="body">
-	<header class="row header" id="player"></header>
-	<div class="row">
-		<!-- Dice images -->
-		<div class="dice" id="dice-row"> 
-			<img src="images/1.png" id="die1" data-number="0" onclick="diceClick(this)" class="image">
-			<img src="images/2.png" id="die2" data-number="1" onclick="diceClick(this)" class="image">
-			<img src="images/3.png" id="die3" data-number="2" onclick="diceClick(this)" class="image">
-			<img src="images/4.png" id="die4" data-number="3" onclick="diceClick(this)" class="image">
-			<img src="images/5.png" id="die5" data-number="4" onclick="diceClick(this)" class="image">
-			<img src="images/6.png" id="die6" data-number="5" onclick="diceClick(this)" class="image">
+	<div class="container">
+		<header class="row header" id="player"></header>
+		<div class="row">
+			<!-- Dice images -->
+			<div class="dice" id="dice-row"> 
+				<img src="images/1.png" id="die1" data-number="0" onclick="diceClick(this)" class="image">
+				<img src="images/2.png" id="die2" data-number="1" onclick="diceClick(this)" class="image">
+				<img src="images/3.png" id="die3" data-number="2" onclick="diceClick(this)" class="image">
+				<img src="images/4.png" id="die4" data-number="3" onclick="diceClick(this)" class="image">
+				<img src="images/5.png" id="die5" data-number="4" onclick="diceClick(this)" class="image">
+				<img src="images/6.png" id="die6" data-number="5" onclick="diceClick(this)" class="image">
+			</div>
+		</div>
+		<!-- Scoring -->
+		<div class="row">
+			<span class="score" id="round-score">0</span>
+		</div>
+		<!-- Button row -->
+		<div class="row">
+			<button class="button roll" onclick="rollDice()">Roll Dice</button>
+			<button class="button bank" id="bank" onClick="bankScore()">Bank Score</button>
 		</div>
 	</div>
-	<!-- Scoring -->
-	<div class="row score" id="round-score"> 0 </div>
-	<!-- Button row -->
-	<div class="row">
-		<button class="button roll column" onclick="rollDice()">Roll Dice</button>
-		<button class="button bank column" id="bank" onClick="bankScore()">Bank Score</button>
-	</div>
+
 	<!-- Total scores-->
 	<footer class="row totals" id="scores-row"></div>
 </body>
