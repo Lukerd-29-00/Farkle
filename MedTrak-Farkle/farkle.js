@@ -30,6 +30,8 @@ function initializeDice(){
 		diceArr[i].value = i + 1;
 		diceArr[i].clicked = 0;
 		diceArr[i].locked = 0;
+		document.getElementById(`die${i+1}`).classList.remove("transparent")
+		document.getElementById(`die${i+1}`).classList.remove("locked")
 	}
 }
 
@@ -46,6 +48,9 @@ function rollDice(){
 	for(let i = 0;i < diceArr.length;i++){
 		if(diceArr[i].clicked === 1){
 			diceArr[i].locked = 1;
+			const img = document.getElementById(`die${i+1}`);
+			img.classList.remove("transparent");
+			img.classList.add("locked");
 		}
 	}
 	if(calcScore(diceArr.filter(v => {
@@ -72,8 +77,10 @@ function bankScore(){
 	round_score = 0;
 	roll_score = 0;
 
-	document.getElementById("total-score").innerText = `${total_score}`
-	document.getElementById("round-score").innerText = `${0}`
+	document.getElementById("total-score").innerText = `${total_score}`;
+	document.getElementById("round-score").innerText = `${0}`;
+
+	updateDiceImg();
 }
 
 

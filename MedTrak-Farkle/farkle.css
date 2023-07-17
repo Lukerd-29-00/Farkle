@@ -63,3 +63,6 @@ body{
 	/*For dice that are selected*/
 	opacity: 0.75;
 }
+.locked{
+	opacity: 0.5;
+}
