@@ -4,6 +4,8 @@ const NUM_DICE = 6;
 const total_scores = new Array(NUM_PLAYERS);
 total_scores.fill(0)
 
+const WINNING_SCORE = 1000;
+
 let player = -1;
 
 const diceArr = [];
@@ -15,6 +17,10 @@ let roll_score = 0;
 let total_score = 0;
 
 let firstRoll = 0;
+
+let endgame = 0;
+
+let turns_remaining = NUM_PLAYERS - 1;
 
 const config = {
 	values: 6,
@@ -86,6 +92,28 @@ function rollDice(){
 	updateDiceImg();
 }
 
+function win(){
+	let winners = new Array(0)
+	let best_score = 0;
+	for(let i = 0;i < total_scores.length;i++){
+		if(total_scores[i] > best_score){
+			winners = new Array(1);
+			winners[0] = i;
+			best_score = total_scores[i];
+		}else if(total_scores[i] === best_score){
+			winners.add(i);
+			best_score = total_scores[i];
+		}
+	}
+	document.getElementById("body").innerHTML = "";
+
+	const node = document.createElement("header");
+	node.classList.add("row","header");
+	node.innerText = winners.length === 1 ? `Player ${winners[0]+1} Wins!` : `Tie!`;
+
+	document.getElementById("body").appendChild(node)
+}
+
 function bankScore(){
 	if(!firstRoll){
 		return
@@ -96,6 +124,15 @@ function bankScore(){
 
 	document.getElementById(`total-score-${player}`).innerText = `${total_scores[player]}`;
 	document.getElementById("round-score").innerText = `${0}`;
+
+	if(total_scores[player] >= WINNING_SCORE && endgame === 0){
+		endgame = 1;
+	}else if(endgame === 1){
+		turns_remaining--;
+	}
+	if(turns_remaining <= 0){
+		win();
+	}
 
 	initializeDice();
 	updateDiceImg();
