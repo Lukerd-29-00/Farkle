@@ -89,10 +89,8 @@ function calcScore(dice){
 	}
 	const keys = found.keys()
 	for(let key = keys.next(); !key.done; key = keys.next()){
-		if(found.get(key.value) >= 3)
-			score += config.triples[key.value-1]*(Math.floor(found.get(key.value)/3))
-		else
-			score += config.singles[key.value-1]*found.get(key.value)
+		score += config.triples[key.value-1]*(Math.floor(found.get(key.value)/3))
+		score += config.singles[key.value-1]*(found.get(key.value) % 3)
 	}
 	return score
 }
