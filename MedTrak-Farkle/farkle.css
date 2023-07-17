@@ -1,5 +1,6 @@
 img{
 	width:80px;
+	cursor: pointer;
 }
 body{
 	background-color: #fff;
@@ -60,19 +61,18 @@ body{
 	flex-direction: row;
 	justify-content: space-evenly;
 }
-.roll{
-}
 .roll:hover{
-}
-.bank{
+	cursor:pointer;
 }
 .bank:hover{
+	cursor:pointer;
 }
 .transparent{
 	/*For dice that are selected*/
 	opacity: 0.75;
 }
 .locked{
+	cursor:default !important;
 	opacity: 0.25;
 }
 .container{
